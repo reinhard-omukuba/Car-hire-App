@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/new_post"
+        android:title="New Post"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_add_circle_outline_24"></item>
+<!--    <item android:id="@+id/likes"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:title="Likes"-->
+<!--        android:icon="@drawable/dislike"></item>-->
+    <item android:id="@+id/messages"
+
+        android:title="Message"
+        android:icon="@drawable/ic_message"></item>
+    <item android:id="@+id/wishlist"
+
+        android:title="Wishlist"
+        android:icon="@drawable/ic_bookmark_24"></item>
+    <item android:id="@+id/camera"
+
+        android:title="Camera"
+        android:icon="@drawable/ic_camera_24"></item>
+    <item android:id="@+id/more"
+
+        android:title="More"
+        android:icon="@drawable/ic_baseline_more_24"></item>
+    <item android:id="@+id/search1"
+
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"></item>
+
+</menu>

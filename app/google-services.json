@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "384497389614",
+    "firebase_url": "https://carrentingapp-5bf98-default-rtdb.firebaseio.com",
+    "project_id": "carrentingapp-5bf98",
+    "storage_bucket": "carrentingapp-5bf98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384497389614:android:31a12b4f1fd0109b248fbf",
+        "android_client_info": {
+          "package_name": "com.iqra.carrenting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384497389614-kc1uf9908gt550ra4l9i4d46mljnuc8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iqra.carrenting",
+            "certificate_hash": "1f9b52491764e723a8def596a8c0ebc70487059d"
+          }
+        },
+        {
+          "client_id": "384497389614-37kabp92m1an8cto8fkl7kjm9dcemonc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIwyFa-pLi3JlgdGSB0NsYVrwC-O3ER1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384497389614-37kabp92m1an8cto8fkl7kjm9dcemonc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
