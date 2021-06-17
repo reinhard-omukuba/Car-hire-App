@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,6 +27,7 @@ public class NewPostActivity extends AppCompatActivity {
     private EditText captionModel;
     private EditText captionEngine;
     private EditText captionPrice;
+    private FirebaseAuth mAuth;
 
     private Button btnTweet;
     private ImageButton selectImage;
@@ -47,6 +49,8 @@ public class NewPostActivity extends AppCompatActivity {
         captionPrice = findViewById(R.id.editTextPrice);
         captionModel = findViewById(R.id.editTextModel);
         captionEngine = findViewById(R.id.editTextEngine);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -95,10 +99,14 @@ public class NewPostActivity extends AppCompatActivity {
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    String user_id = mAuth.getCurrentUser().getUid();
+
                     newTweet.child("tweet").setValue(tweet_caption);
                     newTweet.child("tweet_id").setValue(newTweet.getKey());
 
                     newTweet.child("engine_size").setValue(tweet_engine);
+                    newTweet.child("user_id").setValue(user_id);
                     newTweet.child("car_model").setValue(tweet_model);
                     newTweet.child("car_price").setValue(tweet_price);
 

@@ -31,6 +31,8 @@ public class UpdateAccount extends AppCompatActivity {
 
     private ProgressDialog mDialog;
 
+    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

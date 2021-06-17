@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
 
 
-            mDialog.setMessage("Subiri kidogo......");
+            mDialog.setMessage("Please wait......");
             mDialog.show();
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
