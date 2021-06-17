@@ -81,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                         current_user_db.child("id").setValue(user_id);
                         current_user_db.child("email").setValue(email);
                         current_user_db.child("full_name").setValue(fullname);
+                        current_user_db.child("usertown").setValue("usertown");
 
 
                         Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.iqra.carrenting.fragments.AccountFragment;
 import com.iqra.carrenting.fragments.HomeFragment;
 import com.iqra.carrenting.fragments.ProfileFragment;
 import com.iqra.carrenting.fragments.ReelsFragment;
@@ -52,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.profile:
-                        fragment = new ProfileFragment();
+                        fragment = new AccountFragment();
                         break;
                 }
 

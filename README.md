@@ -1,1 +1,2 @@
-# Car-hire-App
+# InstagramClone
+Instagram Clone

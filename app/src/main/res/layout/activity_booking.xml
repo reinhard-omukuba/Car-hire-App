@@ -11,6 +11,7 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="230dp"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/add_btn" />
 
     <TextView
@@ -29,8 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="20sp"
+        android:layout_marginBottom="10sp"
         android:text="16sp" />
+
+    <TextView
+        android:id="@+id/engineSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="20sp"
+        android:text="TextView" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,7 +129,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnBook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Book "
