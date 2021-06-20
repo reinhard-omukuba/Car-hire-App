@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -27,10 +28,16 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class PaymentsActivity extends AppCompatActivity {
 
     private String car_price = null;
+    private String car_id = null;
+    private String carName = null;
+    private String engineSize = null;
+    private String fullDuration = null;
+
     private TextView theCarPrice;
 
     private Spinner mSpinner;
@@ -40,9 +47,11 @@ public class PaymentsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    private String theprice;
+
     private int PAYPAL_REQ_CODE = 12;
     private static PayPalConfiguration paypalconfig = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
             .clientId(PaypalClientIDConfigClass.PAYPAL_CLIENT_ID);
 
     @Override
@@ -53,7 +62,7 @@ public class PaymentsActivity extends AppCompatActivity {
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         btnPay = findViewById(R.id.btnPay);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Bookings");
 
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, paypalconfig);
@@ -61,6 +70,10 @@ public class PaymentsActivity extends AppCompatActivity {
 
         theCarPrice = findViewById(R.id.theCarPrice);
         car_price = getIntent().getExtras().getString("car_price");
+        car_id = getIntent().getExtras().getString("car_id");
+
+        carName = getIntent().getExtras().getString("carName");
+        engineSize = getIntent().getExtras().getString("engineSize");
         theCarPrice.setText(car_price);
 
 
@@ -79,8 +92,14 @@ public class PaymentsActivity extends AppCompatActivity {
                 int unitPrice = Integer.parseInt(car_price);
                 int unitDays = Integer.parseInt(text);
 
+                fullDuration = unitDays +"";
+
 
                 tvTotalAmount.setText(String.valueOf(unitDays * unitPrice));
+
+                int totalPayableAmount = unitPrice * unitDays;
+
+                theprice = totalPayableAmount + "";
 
                 //payment Activity
 
@@ -91,7 +110,7 @@ public class PaymentsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        PayPalPayment payment = new PayPalPayment(new BigDecimal(unitPrice/100), "USD",
+                        PayPalPayment payment = new PayPalPayment(new BigDecimal(totalPayableAmount/100), "USD",
                                 "Car hire app", PayPalPayment.PAYMENT_INTENT_SALE);
 
                         Intent intent = new Intent(PaymentsActivity.this,  PaymentActivity.class);
@@ -126,16 +145,30 @@ public class PaymentsActivity extends AppCompatActivity {
                 mAuth =FirebaseAuth.getInstance();
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 String userid=user.getUid();
+               // Map<String, String> bookingDate = ServerValue.TIMESTAMP;
+
+                //Date date = new Date();
+                // Map<String, String> timestamp = ServerValue.TIMESTAMP;
+
+
+                DatabaseReference current_user_db = mDatabase.push();
+
+
 
                 mDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot snapshot) {
 
-                        DatabaseReference current_user_db = mDatabase;
-                        current_user_db.child("id").setValue(userid);
-                        current_user_db.child("booking_price").setValue(car_price);
-                        current_user_db.child("car_id").setValue(car_price);
 
+
+                        current_user_db.child("userid").setValue(userid);
+                        current_user_db.child("booking_price").setValue(theprice);
+                        current_user_db.child("car_id").setValue(car_id);
+
+                        current_user_db.child("car_name").setValue(carName);
+                        current_user_db.child("booking_durations").setValue(fullDuration);
+                        current_user_db.child("engine_size").setValue(engineSize);
+                        //current_user_db.child("booking_date").setValue(timestamp);
 
 
 
@@ -148,10 +181,12 @@ public class PaymentsActivity extends AppCompatActivity {
                 });
 
 
+                finish();
 
                 Intent intent = new Intent(PaymentsActivity.this, HomeActivity.class);
                 startActivity(intent);
-                //Toast.makeText(this, "Payment Made Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(PaymentsActivity.this, "Booking Successful!", Toast.LENGTH_LONG).show();
+
 
             }else{
                 Toast.makeText(this, "Payment is Unsuccessful", Toast.LENGTH_LONG).show();

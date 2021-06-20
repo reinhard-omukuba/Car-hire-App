@@ -68,6 +68,8 @@ public class BookingActivity extends AppCompatActivity {
                 String post_price = (String) snapshot.child("car_price").getValue();
                 String engine_size = (String) snapshot.child("engine_size").getValue();
 
+                String car_id = (String) snapshot.child("tweet_id").getValue();
+
                 String theuser_id = (String) snapshot.child("user_id").getValue();
                 String user_id = mAuth.getCurrentUser().getUid();
 
@@ -76,6 +78,7 @@ public class BookingActivity extends AppCompatActivity {
                     btnReserve.setVisibility(View.GONE);
                 }
 
+                String carFullName = post_type + " " + post_model;
 
                 carType.setText(post_type);
                 carModel.setText(post_model);
@@ -89,6 +92,10 @@ public class BookingActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(BookingActivity.this, PaymentsActivity.class);
                         intent.putExtra("car_price", post_price);
+                        intent.putExtra("car_id", car_id);
+                        intent.putExtra("carName", carFullName);
+                        intent.putExtra("engineSize", engine_size);
+
                         startActivity(intent);
                     }
                 });
